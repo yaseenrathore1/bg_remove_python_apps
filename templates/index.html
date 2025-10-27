@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free AI Background Remover - Unlimited Bulk Processing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    animation: {
+                        'pulse-slow': 'pulse 3s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'gradient': 'gradient 8s ease infinite',
+                    },
+                    colors: {
+                        dark: {
+                            100: '#0a0a0a',
+                            200: '#1a1a1a',
+                            300: '#2d2d2d',
+                            400: '#404040',
+                            500: '#525252',
+                            600: '#666666',
+                            700: '#7a7a7a',
+                            800: '#8f8f8f',
+                            900: '#a3a3a3',
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'grid-pattern': 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+                    },
+                    backgroundSize: {
+                        'grid-pattern': '50px 50px',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white dark:bg-dark-100 text-gray-900 dark:text-white transition-colors duration-300 relative overflow-hidden" data-scroll-container>
+    <!-- Animated Background Patterns -->
+    <div class="fixed inset-0 -z-10 opacity-10">
+        <!-- Grid Pattern -->
+        <div class="absolute inset-0 bg-grid-pattern bg-[length:50px_50px]"></div>
+        
+        <!-- Floating Shapes -->
+        <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute top-3/4 right-1/4 w-96 h-96 bg-gradient-to-r from-green-500/10 to-cyan-500/10 rounded-full blur-3xl animate-float" style="animation-delay: -2s;"></div>
+        <div class="absolute bottom-1/4 left-1/2 w-64 h-64 bg-gradient-to-r from-pink-500/15 to-red-500/15 rounded-full blur-3xl animate-float" style="animation-delay: -4s;"></div>
+        
+        <!-- Animated Gradient Orbs -->
+        <div class="absolute top-0 left-0 w-full h-full">
+            <div class="absolute top-20 left-10 w-4 h-4 bg-blue-400 rounded-full animate-pulse"></div>
+            <div class="absolute top-40 right-20 w-3 h-3 bg-purple-400 rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
+            <div class="absolute bottom-20 left-20 w-5 h-5 bg-green-400 rounded-full animate-pulse" style="animation-delay: 1s;"></div>
+            <div class="absolute bottom-40 right-10 w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style="animation-delay: 1.5s;"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/80 dark:bg-dark-200/80 backdrop-blur-lg z-50 border-b border-gray-200 dark:border-dark-300 transition-all duration-300" data-scroll data-scroll-sticky>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center">
+                        <div class="relative">
+                            <div class="w-3 h-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full absolute -top-1 -right-1 animate-ping"></div>
+                            <i class="fas fa-robot text-2xl bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent"></i>
+                        </div>
+                        <span class="text-xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">ClearMyBG</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
+                        <i class="fas fa-infinity mr-1"></i>Unlimited Free
+                    </span>
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-dark-300 hover:bg-gray-200 dark:hover:bg-dark-400 transition-colors">
+                        <i class="fas fa-moon text-yellow-500 dark:text-gray-300"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="pt-16" data-scroll-section>
+        <div class="flex max-w-7xl mx-auto w-full px-4 py-8">
+            <!-- Left/Main Section -->
+            <div class="flex-1 mr-8">
+                <!-- Hero Section -->
+                <div class="text-center mb-16" data-scroll data-scroll-speed="1">
+                    <div class="inline-flex items-center bg-gradient-to-r from-blue-500/20 to-purple-500/20 dark:from-blue-500/10 dark:to-purple-500/10 text-blue-600 dark:text-blue-400 px-6 py-3 rounded-full text-sm font-medium mb-6 border border-blue-200 dark:border-blue-800" data-scroll data-scroll-delay="0.1">
+                        <i class="fas fa-bolt mr-2"></i>UNLIMITED BULK PROCESSING
+                    </div>
+                    <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent" data-scroll data-scroll-delay="0.2">
+                        Free AI Background Remover
+                    </h1>
+                    <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed" data-scroll data-scroll-delay="0.3">
+                        Remove backgrounds from unlimited images simultaneously with our advanced AI. 
+                        <span class="text-blue-400 dark:text-blue-300 font-semibold">Lightning fast, high quality, and completely free!</span>
+                    </p>
+                </div>
+
+                <!-- Upload Section -->
+                <div class="bg-white/80 dark:bg-dark-200/80 backdrop-blur-lg rounded-3xl shadow-2xl p-8 mb-12 border border-gray-100 dark:border-dark-300 transform transition-all duration-500 hover:shadow-3xl" data-scroll data-scroll-speed="0.5">
+                    <div class="text-center">
+                        <!-- Upload Box -->
+                        <div id="uploadArea" 
+                             class="upload-area border-2 border-dashed border-gray-300 dark:border-dark-400 rounded-3xl p-12 text-center cursor-pointer transition-all duration-500 hover:border-blue-400 hover:dark:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-500/10 mb-8 group relative overflow-hidden"
+                             data-scroll
+                             data-scroll-delay="0.4">
+                             
+                            <!-- Animated border -->
+                            <div class="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-5 transition-opacity duration-500"></div>
+                             
+                            <div class="relative inline-block mb-4">
+                                <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-cloud-upload-alt text-2xl text-white"></i>
+                                </div>
+                                <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
+                            </div>
+                            <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3">
+                                Drop your images here
+                            </h3>
+                            <p class="text-gray-500 dark:text-gray-400 mb-6 text-lg">
+                                Supports JPG, PNG, WEBP, BMP, TIFF • Unlimited Files • 500MB Total
+                            </p>
+                            <button class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg group relative overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                                <i class="fas fa-plus mr-2 transform group-hover:rotate-90 transition-transform"></i>Select Images
+                            </button>
+                            <input type="file" id="fileInput" multiple accept=".jpg,.jpeg,.png,.webp,.bmp,.tiff" class="hidden">
+                        </div>
+
+                        <!-- Selected Files -->
+                        <div id="selectedFiles" class="hidden mb-8" data-scroll data-scroll-delay="0.5">
+                            <h4 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">Selected Files:</h4>
+                            <div id="fileList" class="space-y-3 max-h-64 overflow-y-auto pr-2"></div>
+                        </div>
+
+                        <!-- Processing Features -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8" data-scroll data-scroll-delay="0.6">
+                            <div class="feature-card p-4 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-2xl border border-green-500/20">
+                                <i class="fas fa-infinity text-green-400 text-2xl mb-2"></i>
+                                <span class="text-sm font-medium text-green-600 dark:text-green-400">Unlimited Files</span>
+                            </div>
+                            <div class="feature-card p-4 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-2xl border border-blue-500/20">
+                                <i class="fas fa-bolt text-blue-400 text-2xl mb-2"></i>
+                                <span class="text-sm font-medium text-blue-600 dark:text-blue-400">Parallel Processing</span>
+                            </div>
+                            <div class="feature-card p-4 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl border border-purple-500/20">
+                                <i class="fas fa-crown text-purple-400 text-2xl mb-2"></i>
+                                <span class="text-sm font-medium text-purple-600 dark:text-purple-400">High Quality</span>
+                            </div>
+                        </div>
+
+                        <!-- Process Button -->
+                        <button id="processBtn" 
+                                class="process-btn bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-5 px-16 rounded-2xl transition-all duration-500 transform hover:scale-105 shadow-2xl w-full max-w-md disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none text-lg relative overflow-hidden group"
+                                data-scroll
+                                data-scroll-delay="0.7">
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                            <i class="fas fa-magic mr-3 transform group-hover:rotate-12 transition-transform"></i>
+                            <span class="relative">Remove Backgrounds</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Loading Section -->
+                <div id="loadingSection" class="hidden bg-white/80 dark:bg-dark-200/80 backdrop-blur-lg rounded-3xl shadow-2xl p-12 mb-12 text-center border border-gray-100 dark:border-dark-300" data-scroll data-scroll-speed="0.3">
+                    <div class="loading-spinner mx-auto mb-6"></div>
+                    <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-4">Processing Your Images</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6 text-lg" id="loadingText">Removing backgrounds with AI...</p>
+                    <div class="w-full bg-gray-200 dark:bg-dark-300 rounded-full h-3 max-w-md mx-auto mb-4">
+                        <div id="progressBar" class="progress-bar bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full transition-all duration-300 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 animate-shine"></div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Processing images in parallel for maximum speed</p>
+                </div>
+
+                <!-- Results Section -->
+                <div id="resultsSection" class="hidden bg-white/80 dark:bg-dark-200/80 backdrop-blur-lg rounded-3xl shadow-2xl p-10 border border-gray-100 dark:border-dark-300" data-scroll data-scroll-speed="0.4">
+                    <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-8 text-center">
+                        <i class="fas fa-check-circle text-green-400 mr-3"></i>Backgrounds Removed Successfully!
+                    </h2>
+                    
+                    <!-- Single Result -->
+                    <div id="singleResult" class="hidden">
+                        <div class="grid md:grid-cols-2 gap-10 mb-10">
+                            <div class="text-center">
+                                <h4 class="font-semibold text-gray-700 dark:text-gray-300 mb-4 text-lg">Original Image</h4>
+                                <div class="relative bg-gray-100 dark:bg-dark-300 rounded-2xl p-4 border border-gray-200 dark:border-dark-400">
+                                    <img id="originalPreview" class="image-preview w-full rounded-xl mx-auto max-h-80 object-contain">
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <h4 class="font-semibold text-gray-700 dark:text-gray-300 mb-4 text-lg">Background Removed</h4>
+                                <div class="relative bg-gray-100 dark:bg-dark-300 rounded-2xl p-4 border border-gray-200 dark:border-dark-400">
+                                    <img id="processedPreview" class="image-preview w-full rounded-xl mx-auto max-h-80 object-contain bg-checkerboard">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <a id="downloadBtn" class="download-btn bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-bold py-4 px-10 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg inline-flex items-center text-lg group">
+                                <i class="fas fa-download mr-3 transform group-hover:-translate-y-1 transition-transform"></i>Download Image
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Bulk Result -->
+                    <div id="bulkResult" class="hidden">
+                        <div class="text-center mb-8">
+                            <div class="relative inline-block mb-6">
+                                <div class="w-24 h-24 bg-gradient-to-r from-blue-500 to-purple-500 rounded-3xl flex items-center justify-center transform hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-file-archive text-3xl text-white"></i>
+                                </div>
+                                <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl blur opacity-25"></div>
+                            </div>
+                            <h4 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3" id="bulkFileCount"></h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-lg">All your processed images are ready for download in a single ZIP file</p>
+                        </div>
+                        <div class="text-center">
+                            <a id="bulkDownloadBtn" class="download-btn bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-bold py-5 px-12 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg inline-flex items-center text-lg group">
+                                <i class="fas fa-download mr-3 transform group-hover:-translate-y-1 transition-transform"></i>Download All Images as ZIP
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features Grid -->
+                <div class="grid md:grid-cols-4 gap-8 mt-20" data-scroll data-scroll-speed="0.6">
+                    <div class="feature-card bg-white/80 dark:bg-dark-200/80 backdrop-blur-lg rounded-2xl p-8 shadow-xl border border-gray-100 dark:border-dark-300 text-center transform transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+                        <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-infinity text-white text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 dark:text-white mb-3 text-lg">Unlimited Files</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">Process as many images as you want in one go</p>
+                    </div>
+                    <div class="feature-card bg-white/80 dark:bg-dark-200/80 backdrop-blur-lg rounded-2xl p-8 shadow-xl border border-gray-100 dark:border-dark-300 text-center transform transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+                        <div class="w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-bolt text-white text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 dark:text-white mb-3 text-lg">Parallel Processing</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">8x faster with simultaneous AI processing</p>
+                    </div>
+                    <div class="feature-card bg-white/80 dark:bg-dark-200/80 backdrop-blur-lg rounded-2xl p-8 shadow-xl border border-gray-100 dark:border-dark-300 text-center transform transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+                        <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-crown text-white text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 dark:text-white mb-3 text-lg">High Quality</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">Professional results with transparent PNGs</p>
+                    </div>
+                    <div class="feature-card bg-white/80 dark:bg-dark-200/80 backdrop-blur-lg rounded-2xl p-8 shadow-xl border border-gray-100 dark:border-dark-300 text-center transform transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-shield-alt text-white text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 dark:text-white mb-3 text-lg">Auto Cleanup</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">Files automatically deleted after 1 hour</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="w-80 flex-shrink-0 sidebar" data-scroll data-scroll-sticky data-scroll-target="[data-scroll-container]" data-scroll-speed="2">
+                <!-- Ad Space -->
+                <div class="bg-white/80 dark:bg-dark-200/80 backdrop-blur-lg rounded-3xl shadow-2xl p-6 mb-6 border border-gray-100 dark:border-dark-300 transform transition-all duration-500 hover:shadow-3xl">
+                    <div class="text-center">
+                        <div class="w-full h-96 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-2xl flex items-center justify-center mb-4 border border-blue-200 dark:border-blue-500/30">
+                            <div class="text-center">
+                                <i class="fas fa-ad text-blue-400 text-4xl mb-3"></i>
+                                <p class="text-blue-600 dark:text-blue-400 font-semibold">Ad Space</p>
+                                <p class="text-blue-400 text-sm">300x600</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm">Your advertisement here</p>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="bg-white/80 dark:bg-dark-200/80 backdrop-blur-lg rounded-3xl shadow-2xl p-6 border border-gray-100 dark:border-dark-300">
+                    <h3 class="font-bold text-gray-800 dark:text-white mb-6 text-lg">Why Choose Us?</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center p-3 bg-gradient-to-r from-green-500/5 to-emerald-500/5 rounded-xl border border-green-500/10">
+                            <i class="fas fa-infinity text-green-400 text-xl mr-4"></i>
+                            <span class="text-gray-700 dark:text-gray-300 font-medium">Truly Unlimited</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-gradient-to-r from-yellow-500/5 to-orange-500/5 rounded-xl border border-yellow-500/10">
+                            <i class="fas fa-bolt text-yellow-400 text-xl mr-4"></i>
+                            <span class="text-gray-700 dark:text-gray-300 font-medium">8x Parallel Processing</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-gradient-to-r from-blue-500/5 to-cyan-500/5 rounded-xl border border-blue-500/10">
+                            <i class="fas fa-shield-alt text-blue-400 text-xl mr-4"></i>
+                            <span class="text-gray-700 dark:text-gray-300 font-medium">Secure & Private</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-gradient-to-r from-purple-500/5 to-pink-500/5 rounded-xl border border-purple-500/10">
+                            <i class="fas fa-rocket text-purple-400 text-xl mr-4"></i>
+                            <span class="text-gray-700 dark:text-gray-300 font-medium">No Watermarks</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white/80 dark:bg-dark-200/80 backdrop-blur-lg border-t border-gray-200 dark:border-dark-300 mt-20" data-scroll-section>
+        <div class="max-w-7xl mx-auto px-4 py-8">
+            <div class="text-center">
+                <p class="text-gray-600 dark:text-gray-300 text-lg">
+                    Made with ❤️ by RRG | Free for Everyone
+                </p>
+                <p class="text-gray-500 dark:text-gray-400 text-sm mt-2">
+                    Powered by AI - Processed images are automatically deleted after 1 hour
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
